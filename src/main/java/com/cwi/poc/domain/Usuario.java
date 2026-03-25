@@ -25,8 +25,8 @@ public class Usuario extends BaseEntity {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Permissao> permissoes = new ArrayList<>();
 
-    public List<String> retornarPermissoesEmString(List<Permissao> permissoes) {
-        return permissoes
+    public List<String> retornarPermissoesEmString() {
+        return this.permissoes
                 .stream()
                 .map(Permissao::getNome)
                 .toList();

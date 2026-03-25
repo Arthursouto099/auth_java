@@ -50,7 +50,7 @@ public class TokenService {
                 .expiresAt(Instant.now().plusSeconds(EXPIRES_IN))
                 .issuedAt(Instant.now())
                 .claim("email", usuario.getEmail())
-                .claim("scope", usuario.retornarPermissoesEmString(usuario.getPermissoes()))
+                .claim("scope", usuario.retornarPermissoesEmString())
                 .build();
 
         final var accessToken = jwtEncoder.encode(JwtEncoderParameters.from(jwt)).getTokenValue();
