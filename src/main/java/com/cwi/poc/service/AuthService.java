@@ -28,6 +28,7 @@ public class AuthService {
     private final TokenService tokenService;
     private final AuthUtils authUtils;
 
+    @Transactional
     public JwtTokenValues login(LoginRequest loginRequest) {
 
         final var usuario = usuarioRepository.findByEmail(loginRequest.email())
@@ -36,6 +37,9 @@ public class AuthService {
         if(!passwordEncoder.matches(loginRequest.senha(), usuario.getSenha())) {
             throw new CredenciasInvalidas("Senha Incorreta, credencias invalidas");
         }
+
+        usuario.setDataUltimoAcesso(LocalDateTime.now());
+        usuarioRepository.save(usuario);
 
         return tokenService.gerarToken(usuario);
     }

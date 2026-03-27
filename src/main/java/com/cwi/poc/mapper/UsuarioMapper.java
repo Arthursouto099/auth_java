@@ -13,9 +13,12 @@ public class UsuarioMapper {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.isAtivo(),
+                usuario.getAtivo(),
+                usuario.getCpf(),
+                usuario.getDataNascimento(),
                 usuario.getCriadoEm(),
                 usuario.getEditadoEm(),
+                usuario.getDataUltimoAcesso(),
                 usuario.retornarPermissoesEmString()
         );
     }

@@ -6,6 +6,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +21,17 @@ public class Usuario extends BaseEntity {
 
     private String nome;
     private String email;
+    private String cpf;
     private String senha;
-    private boolean ativo;
+    private Boolean ativo;
+    private LocalDate dataNascimento;
+    private LocalDateTime dataUltimoAcesso;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Permissao> permissoes = new ArrayList<>();
 
     public List<String> retornarPermissoesEmString() {
+
         return this.permissoes
                 .stream()
                 .map(Permissao::getNome)
@@ -33,6 +39,7 @@ public class Usuario extends BaseEntity {
     }
 
     public void adicionarPermissao(Permissao permissao) {
+
         this.permissoes.add(permissao);
         permissao.setUsuario(this);
     }
